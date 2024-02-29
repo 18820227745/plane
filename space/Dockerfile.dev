@@ -5,8 +5,8 @@ WORKDIR /app
 
 
 COPY . .
-RUN yarn global add turbo
-RUN yarn install
+RUN yarn --registry=https://registry.npmmirror.com global add turbo
+RUN yarn --registry=https://registry.npmmirror.com install
 EXPOSE 4000
 ENV NEXT_PUBLIC_DEPLOY_WITH_NGINX=1
 

@@ -4,7 +4,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 ENV NEXT_PUBLIC_API_BASE_URL=http://NEXT_PUBLIC_API_BASE_URL_PLACEHOLDER
 
-RUN yarn global add turbo
+RUN yarn --registry=https://registry.npmmirror.com global add turbo
 RUN apk add tree
 COPY . .
 
@@ -21,7 +21,7 @@ ARG NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
-RUN yarn install
+RUN yarn --registry=https://registry.npmmirror.com install
 
 # # Build the project
 COPY --from=builder /app/out/full/ .
@@ -30,7 +30,7 @@ COPY replace-env-vars.sh /usr/local/bin/
 USER root
 RUN chmod +x /usr/local/bin/replace-env-vars.sh
 
-RUN yarn turbo run build
+RUN yarn --registry=https://registry.npmmirror.com turbo run build
 
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL \
     BUILT_NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL

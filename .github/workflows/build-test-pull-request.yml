@@ -38,10 +38,10 @@ jobs:
         if: steps.changed-files.outputs.web_any_changed == 'true'
         run: |
           yarn
-          yarn build --filter=web
+          yarn --registry=https://registry.npmmirror.com build --filter=web
 
       - name: Build Plane's Deploy App
         if: steps.changed-files.outputs.deploy_any_changed == 'true'
         run: |
-          yarn 
-          yarn build --filter=space
+          yarn --registry=https://registry.npmmirror.com 
+          yarn --registry=https://registry.npmmirror.com build --filter=space
