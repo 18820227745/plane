@@ -70,6 +70,8 @@ RUN apk add --no-cache --virtual .build-deps \
     "libc-dev" \
     "linux-headers" \
     && \
+    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
+    && \
     pip install -r requirements.txt --compile --no-cache-dir \
     && \
     apk del .build-deps
